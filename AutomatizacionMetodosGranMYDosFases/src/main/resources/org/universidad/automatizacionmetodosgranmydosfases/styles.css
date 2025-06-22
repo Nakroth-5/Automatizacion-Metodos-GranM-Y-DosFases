@@ -1,0 +1,102 @@
+/* styles.css */
+
+.button {
+    -fx-background-color: #60bfff;   /* azul */
+    -fx-text-fill: white;             /* texto blanco */
+    -fx-font-weight: bold;
+    -fx-padding: 8 15 8 15;
+    -fx-background-radius: 5;
+}
+
+.button-limpiar {
+    -fx-background-color: #2ee312;   /* verde */
+    -fx-text-fill: white;             /* texto blanco */
+    -fx-font-weight: bold;
+    -fx-padding: 8 15 8 15;
+    -fx-background-radius: 5;
+}
+
+.button-container {
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;   /* azul más oscuro al pasar mouse */
+}
+
+.button-limpiar:hover {
+    -fx-background-color: #2f8c21;
+}
+
+.context-menu {
+    -fx-background-color: #029cfb;   /* fondo oscuro */
+    -fx-border-color: #34495e;        /* borde */
+}
+
+.menu-item {
+    -fx-text-fill: white;             /* texto blanco */
+    -fx-font-size: 14px;
+    -fx-padding: 5 10 5 10;
+}
+
+.menu-item:hover {
+    -fx-background-color: #2980b9;   /* fondo azul al pasar mouse */
+}
+
+.panel-redondeado {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #888;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-padding: 10;
+}
+
+.grid-pane {
+    -fx-padding: 20;
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 10;
+}
+
+.main-container {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+}
+
+.label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e;
+}
+
+.scroll-pane {
+    -fx-background: #f5f5f5;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+}
+
+.cell-rectangle {
+    -fx-fill: transparent;
+    -fx-stroke: #34495e;
+    -fx-stroke-width: 1;
+}
+
+.grid-cell {
+    -fx-border-color: #34495e;
+    -fx-border-width: 1;
+    -fx-padding: 5;
+}
+
+.header-label { font-weight: bold; }
+.row-label { font-weight: bold; }
+.artificial-variable { background-color: #ffeeee; }
+.title-label { font-size: 16px; font-weight: bold; }
+.subtitle-label { font-size: 14px; font-weight: bold; margin-top: 10px; }
+.tipo-variable { font-style: italic; color: #666; }
+.objective-label { font-weight: bold; font-size: 14px; }
+.objective-value { font-weight: bold; font-size: 14px; color: #0066cc; }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<Pane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.universidad.automatizacionmetodosgranmydosfases.HelloController"
+      stylesheets="@styles.css">
+    <Pane layoutX="150" layoutY="40"
+          prefWidth="1000"
+          prefHeight="700"
+          styleClass="panel-redondeado">
+        <Label text="Cantidad de variables: " layoutX="50" layoutY="20"/>
+        <Spinner fx:id="spinnerVariables" prefWidth="100" layoutX="50" layoutY="50" />
+        <Button text="Generar Modelo" layoutX="50" layoutY="80" styleClass="button" onAction="#generarModelo"/>
+
+        <Label text="Cantidad de restricciones:" layoutX="250" layoutY="20" />
+        <Spinner fx:id="spinnerRestricciones" prefWidth="100" layoutX="250" layoutY="50" />
+        <Button text="Limpiar" layoutX="250" layoutY="80" styleClass="button-limpiar" onAction="#limpiar"/>
+
+        <Button text="Salir" layoutX="450" layoutY="80" styleClass="button" onAction="#Salir"/>
+
+        <ScrollPane fx:id="scrollFuncionObjetivo" layoutX="50" layoutY="120" prefWidth="900" prefHeight="170">
+            <VBox fx:id="containerFuncionObjetivo" spacing="15" style="-fx-padding: 10;"/>
+        </ScrollPane>
+        <ScrollPane fx:id="scrollRestricciones" layoutX="50" layoutY="305" prefWidth="900" prefHeight="350">
+            <VBox fx:id="containerRestricciones" spacing="15" style="-fx-padding: 10;"/>
+        </ScrollPane>
+    </Pane>
+</Pane>
