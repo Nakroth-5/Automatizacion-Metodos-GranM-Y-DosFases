@@ -52,7 +52,7 @@ Esta herramienta está diseñada para estudiantes, profesores e ingenieros que n
 
 ## 🛠️ Requisitos Previos
 
-- **Java Development Kit (JDK) 17 o superior**
+- **Java Development Kit (JDK) 24 o superior**
 - **Apache Maven 3.6+**
 - **Sistema Operativo**: Windows, macOS o Linux
 - **Memoria RAM**: Mínimo 4GB recomendado
