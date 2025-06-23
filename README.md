@@ -80,7 +80,7 @@ c.	Ingrese el valor del término independiente (lado derecho de la ecuación) en
     
     Maikol Anthony Molina Cortez 
 ## 🔗 Enlace
-    Proyecto IO1.docx
+    [Proyecto IO1.docx](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/blob/master/Proyecto%20IO1.docx)
     [Uploading Presentacion6.html…]()
 
 
