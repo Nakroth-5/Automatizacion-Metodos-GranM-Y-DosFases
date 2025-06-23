@@ -208,7 +208,7 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 ## 🔗 Enlaces Adicionales
 
 - **Documentación del Proyecto**: [Proyecto IO1.docx](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/blob/master/Proyecto%20IO1.docx)
-- **Presentación**: [Ver Presentación](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases)
+- **Presentación**: [Ver Presentación]([https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/blob/master/Presentacion.html)
 - **Reportar Bugs**: [Issues](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/issues)
 - **Solicitar Funcionalidades**: [Feature Requests](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/issues)
 
