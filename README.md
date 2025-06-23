@@ -12,6 +12,12 @@ Aplicación Java que automatiza los métodos de la **Gran M** y **Dos Fases**
 para resolver problemas de Programación Lineal (PL), con interfaz gráfica intuitiva y visualización detallada del proceso Simplex.
 
 ## 📥 Instalación
+1. Clonar repositorio:
+```bash
+git clone https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases.git
+cd Automatizacion-Metodos-GranM-Y-DosFases
+```
+2. Ejecutar con Maven: mvn clean javafx:run
 
 ## ✨ Características
 
@@ -43,12 +49,7 @@ src/
 │ ├── styles/
 │ └── fxml/
 
-1. Clonar repositorio:
-```bash
-git clone https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases.git
-cd Automatizacion-Metodos-GranM-Y-DosFases
-```
-2. Ejecutar con Maven: mvn clean javafx:run
+
 
 ## 🖥️ Manual de Uso
 1.	Inicio de la Aplicación:
@@ -79,8 +80,8 @@ c.	Ingrese el valor del término independiente (lado derecho de la ecuación) en
     
     Maikol Anthony Molina Cortez 
 ## 🔗 Enlace
-[Proyecto IO1.docx](https://github.com/user-attachments/files/20855380/Proyecto.IO1.docx)
-[Uploading Presentacion6.html…]()
+    [Proyecto IO1.docx](https://github.com/user-attachments/files/20855380/Proyecto.IO1.docx)
+    [Uploading Presentacion6.html…]()
 
 
 
