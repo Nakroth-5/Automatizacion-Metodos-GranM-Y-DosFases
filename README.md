@@ -75,6 +75,7 @@ c.	Ingrese el valor del término independiente (lado derecho de la ecuación) en
 	Use el botón "Limpiar" en la ventana principal para borrar todos los campos y comenzar un nuevo problema.
 	Use el botón "Salir" para cerrar la aplicación.
 ## 🧑‍💻 Autores
-  Evert Rodriguez Araúz - @Nakroth-5
-  Maikol Anthony Molina Cortez 
+    Evert Rodriguez Araúz - @Nakroth-5
+    
+    Maikol Anthony Molina Cortez 
   
