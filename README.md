@@ -3,8 +3,8 @@
 [![Java](https://img.shields.io/badge/Java-17%2B-blue)](https://www.java.com/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-17-purple)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+![Interfaz de la Aplicación](https://github.com/user-attachments/assets/d85e18b6-d207-49b1-a167-819cc2434f9c)
 
-![Interfaz de la Aplicación](assets/app-screenshot.png)
 
 ## 📌 Descripción
 
@@ -78,4 +78,9 @@ c.	Ingrese el valor del término independiente (lado derecho de la ecuación) en
     Evert Rodriguez Araúz - @Nakroth-5
     
     Maikol Anthony Molina Cortez 
-  
+## 🔗 Enlace
+[Proyecto IO1.docx](https://github.com/user-attachments/files/20855380/Proyecto.IO1.docx)
+[Uploading Presentacion6.html…]()
+
+
+
