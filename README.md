@@ -1,6 +1,6 @@
 # Automatización de los Métodos Gran M y Dos Fases
 
-[![Java](https://img.shields.io/badge/Java-17%2B-blue)](https://www.java.com/)
+[![Java](https://img.shields.io/badge/Java-24%2B-blue)](https://www.java.com/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-17-purple)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)]()
