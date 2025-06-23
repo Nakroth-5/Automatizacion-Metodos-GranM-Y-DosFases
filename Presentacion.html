@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatización Simplex - Presentación Avanzada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --dark: #111827;
+            --darker: #0d1321;
+            --card-bg: #1f2937;
+            --card-border: #374151;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: #F9FAFB;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 20%);
+            z-index: -1;
+        }
+        
+        .presentation-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .slide-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            overflow-y: auto;
+            padding: 1rem;
+            perspective: 1000px;
+        }
+        
+        .slide {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            background: rgba(31, 41, 55, 0.6);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 80vh;
+            transform: translate(-50%, -50%) scale(1);
+            animation: slideIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -45%) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0.7;
+        }
+        
+        .icon {
+            width: 72px;
+            height: 72px;
+            stroke-width: 1.5;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            filter: drop-shadow(0 5px 10px rgba(99, 102, 241, 0.3));
+        }
+        
+        .arrow {
+            font-size: 3rem;
+            color: var(--primary);
+            margin: 0 1rem;
+            text-shadow: 0 5px 15px rgba(79, 70, 229, 0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: bold;
+            text-shadow: 0 2px 10px rgba(99, 102, 241, 0.5);
+        }
+        
+        .mock-ui {
+            background: linear-gradient(145deg, #2d3748, #1f2937);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 600px;
+            border: 1px solid #4B5563;
+            margin: 0 auto;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .mock-ui.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .mock-ui::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .mock-window {
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            text-align: left;
+            font-family: 'Consolas', monospace;
+            white-space: pre;
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--primary);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mock-window.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .stagger-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .float {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(99, 102, 241, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.3);
+            animation: float 8s infinite linear;
+        }
+        
+        /* Media queries para mejor responsividad */
+        @media (max-width: 768px) {
+            .slide.active {
+                padding: 1.5rem;
+                min-height: 85vh;
+                width: 95%;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .text-4xl {
+                font-size: 1.75rem;
+            }
+            
+            .text-5xl {
+                font-size: 2.25rem;
+            }
+            
+            .flex-col.md\:flex-row {
+                flex-direction: column;
+            }
+            
+            .arrow {
+                margin: 1.5rem 0;
+                transform: rotate(90deg);
+            }
+        }
+        
+        /* Botones de navegación mejorados */
+        .nav-button {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.6);
+        }
+        
+        .nav-button:active {
+            transform: translateY(1px);
+        }
+        
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .nav-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .nav-button:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.5s ease;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.025em;
+        }
+        
+        .title-gradient {
+            background: linear-gradient(90deg, #8b5cf6, #6366f1, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-shift 3s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .slide-title {
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: all 0.8s ease;
+        }
+        
+        .slide-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Nueva clase para animaciones escalonadas */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas de fondo -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="presentation-container">
+        <div class="slide-container">
+            <!-- Slide 1: Título -->
+            <div id="slide-1" class="slide active">
+                <div class="text-center w-full">
+                    <h1 class="text-5xl md:text-7xl font-black mb-6 title-gradient slide-title">Automatización Simplex</h1>
+                    <p class="text-xl md:text-2xl text-gray-300 slide-title" style="transition-delay: 0.2s;">Resolviendo Programación Lineal con Gran M y Dos Fases</p>
+                    <div class="mt-10 text-lg text-gray-400 slide-title" style="transition-delay: 0.4s;">
+                        <p>Un proyecto de software para optimizar la toma de decisiones</p>
+                    </div>
+                    <div class="mt-12 flex justify-center slide-title" style="transition-delay: 0.8s;">
+                        <div class="w-24 h-24 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center float">
+                            <i class="fas fa-calculator text-white text-4xl"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- Slide 2: El Problema (con animación escalonada) -->
+            <div id="slide-2" class="slide">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-bold mb-12 slide-title">El Desafío: La Complejidad Manual</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="card stagger-item">
+                            <div class="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center mb-4">
+                                <i class="fas fa-hourglass-half text-red-400 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Cálculos Extensos</h3>
+                            <p class="text-gray-400">Iteraciones manuales que consumen mucho tiempo.</p>
+                        </div>
+                        <div class="card stagger-item">
+                            <div class="w-16 h-16 rounded-full bg-yellow-500/20 flex items-center justify-center mb-4">
+                                <i class="fas fa-exclamation-triangle text-yellow-400 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Propenso a Errores</h3>
+                            <p class="text-gray-400">Un simple error de cálculo invalida toda la solución.</p>
+                        </div>
+                        <div class="card stagger-item">
+                            <div class="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mb-4">
+                                <i class="fas fa-tachometer-alt text-blue-400 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Lento para Decidir</h3>
+                            <p class="text-gray-400">La lentitud manual retrasa decisiones críticas de negocio.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-bar"></div>
+            </div>
+
+            <!-- Slide 3: La Solución (con animación escalonada) -->
+            <div id="slide-3" class="slide">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-bold mb-12 slide-title">Nuestra Solución: Una Aplicación Inteligente</h2>
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+                        <div class="card w-full md:w-auto stagger-item">
+                            <h3 class="text-2xl font-bold">Entrada del Problema</h3>
+                            <div class="w-16 h-16 rounded-full bg-gray-700 flex items-center justify-center mb-4">
+                                <i class="fas fa-keyboard text-gray-300 text-2xl"></i>
+                            </div>
+                            <p>Z, Restricciones</p>
+                        </div>
+                        <div class="arrow stagger-item">&rarr;</div>
+                        <div class="card w-full md:w-auto bg-indigo-600 border-indigo-500 stagger-item">
+                            <h3 class="text-2xl font-bold">Solver App</h3>
+                            <div class="w-16 h-16 rounded-full bg-white flex items-center justify-center mb-4">
+                                <i class="fas fa-cogs text-indigo-600 text-2xl"></i>
+                            </div>
+                            <p>Gran M / Dos Fases</p>
+                        </div>
+                        <div class="arrow stagger-item">&rarr;</div>
+                        <div class="card w-full md:w-auto stagger-item">
+                            <h3 class="text-2xl font-bold">Solución Óptima</h3>
+                            <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mb-4">
+                                <i class="fas fa-check-circle text-green-400 text-2xl"></i>
+                            </div>
+                            <p>Resultados y Pasos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-bar"></div>
+            </div>
+            
+            <!-- Slide 4: Flujo del Algoritmo (con animación escalonada) -->
+            <div id="slide-4" class="slide">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-bold mb-12 slide-title">Flujo del Algoritmo</h2>
+                    <div class="space-y-6 max-w-3xl mx-auto">
+                        <div class="flex items-center stagger-item">
+                            <div class="bg-indigo-600 rounded-full w-10 h-10 flex items-center justify-center mr-4">1</div>
+                            <p class="text-left">Construcción del tableau inicial con variables artificiales</p>
+                        </div>
+                        <div class="flex items-center stagger-item" style="transition-delay: 0.2s;">
+                            <div class="bg-indigo-600 rounded-full w-10 h-10 flex items-center justify-center mr-4">2</div>
+                            <p class="text-left">Iteraciones Simplex: Selección de pivote y operaciones fila</p>
+                        </div>
+                        <div class="flex items-center stagger-item" style="transition-delay: 0.4s;">
+                            <div class="bg-indigo-600 rounded-full w-10 h-10 flex items-center justify-center mr-4">3</div>
+                            <p class="text-left">(Dos Fases) Transición Fase 1 → Fase 2</p>
+                        </div>
+                        <div class="flex items-center stagger-item" style="transition-delay: 0.6s;">
+                            <div class="bg-indigo-600 rounded-full w-10 h-10 flex items-center justify-center mr-4">4</div>
+                            <p class="text-left">Extracción de valores óptimos y generación de reportes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-bar"></div>
+            </div>
+
+            <!-- Slide 5: Conceptos Clave (con animación escalonada) -->
+            <div id="slide-5" class="slide">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-bold mb-12 slide-title">Conceptos Clave</h2>
+                    <div class="flex flex-col items-center justify-center space-y-8">
+                        <div class="card stagger-item">
+                            <h3 class="text-2xl font-bold">Método Simplex</h3>
+                            <p class="text-gray-400">La base de todo. Navega por los vértices de la región factible.</p>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-500 stagger-item" style="transition-delay: 0.2s;">+</div>
+                        <div class="card stagger-item" style="transition-delay: 0.4s;">
+                            <h3 class="text-2xl font-bold">Variables Artificiales (A)</h3>
+                            <p class="text-gray-400">Se añaden para iniciar la solución en problemas con <span class="highlight">≥</span> o <span class="highlight">=</span>.</p>
+                        </div>
+                        <div class="flex items-center justify-center mt-8 space-x-4 stagger-item" style="transition-delay: 0.6s;">
+                            <div class="w-1/2 h-1 bg-gray-700"></div>
+                            <div class="text-3xl">&darr;</div>
+                            <div class="w-1/2 h-1 bg-gray-700"></div>
+                        </div>
+                        <div class="flex flex-col md:flex-row gap-8 w-full mt-8">
+                            <div class="card flex-1 stagger-item" style="transition-delay: 0.8s;">
+                                <h3 class="text-2xl font-bold">Método Gran M</h3>
+                                <p class="text-gray-400">Penaliza las variables <span class="highlight">A</span> en la función objetivo.</p>
+                            </div>
+                            <div class="card flex-1 stagger-item" style="transition-delay: 1.0s;">
+                                <h3 class="text-2xl font-bold">Método Dos Fases</h3>
+                                <p class="text-gray-400">Primero elimina las <span class="highlight">A</span>, luego optimiza.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-bar"></div>
+            </div>
+	    <!-- Slide 6: Gran M -->
+            <div id="slide-6" class="slide">
+                 <div class="text-center w-full">
+                    <h2 class="text-4xl font-bold mb-12 slide-title">Visualizando la <span class="highlight">Gran M</span></h2>
+                    <div class="flex flex-col items-center justify-center space-y-6">
+                        <div class="card fade-in-up">
+                            <p class="text-xl">Función Objetivo Original</p>
+                            <p class="text-2xl font-mono">Max Z = 3x₁ + 2x₂</p>
+                        </div>
+                        <div class="text-3xl font-bold text-red-500 fade-in-up">- M*A</div>
+                         <div class="card bg-gray-800 border-red-500 fade-in-up">
+                            <p class="text-xl">Función Objetivo Penalizada</p>
+                            <p class="text-2xl font-mono">Max Z = 3x₁ + 2x₂ <span class="text-red-400">- M A₁ - M A₂</span></p>
+                        </div>
+                        <p class="text-lg text-gray-400 mt-8 max-w-2xl fade-in-up">
+                            El valor gigante de <span class="highlight">M</span> fuerza a las variables artificiales (A) a ser cero en la solución óptima. Si no lo hacen, ¡el problema es infactible!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Requerimientos Clave -->
+            <div id="slide-7" class="slide">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-bold mb-8 slide-title">Requerimientos Clave del Sistema</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <div class="card fade-in-up">
+                            <h3 class="text-2xl font-bold text-indigo-400 mb-4">Funcionales</h3>
+                            <ul class="text-left space-y-2">
+                                <li>• Entrada dinámica de variables/restricciones</li>
+                                <li>• Selección de método (Gran M/Dos Fases)</li>
+                                <li>• Visualización de tableaus por iteración</li>
+                                <li>• Diagnóstico de solución (óptima/infactible)</li>
+                            </ul>
+                        </div>
+                        <div class="card fade-in-up">
+                            <h3 class="text-2xl font-bold text-purple-400 mb-4">No Funcionales</h3>
+                            <ul class="text-left space-y-2">
+                                <li>• Precisión matemática (ε = 1e-10)</li>
+                                <li>• Soporte hasta 100 variables / 500 restricciones</li>
+                                <li>• Validación de entradas numéricas</li>
+                                <li>• Interfaz intuitiva con JavaFX</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Dos Fases -->
+            <div id="slide-8" class="slide">
+                 <div class="text-center w-full">
+                    <h2 class="text-4xl font-bold mb-12 slide-title">El Enfoque de <span class="highlight">Dos Fases</span></h2>
+                    <div class="flex flex-col md:flex-row gap-8 w-full">
+                        <!-- Fase 1 -->
+                        <div class="card flex-1 fade-in-up">
+                             <div class="flex items-center justify-center bg-indigo-500 rounded-full w-16 h-16 text-2xl font-bold mb-4">1</div>
+                             <h3 class="text-2xl font-bold">Fase 1: Limpieza</h3>
+                             <p class="text-xl font-mono my-4">Min W = A₁ + A₂ + ...</p>
+                             <p class="text-gray-400">El único objetivo es hacer que todas las variables artificiales sean cero.</p>
+                             <div class="mt-4 p-3 rounded-lg text-lg w-full" id="fase1_result">
+                                <span class="text-green-400 font-bold">Si W = 0 &rarr; Continuar a Fase 2</span>
+                                <br>
+                                <span class="text-red-400 font-bold">Si W > 0 &rarr; Problema Infactible</span>
+                            </div>
+                        </div>
+                        <!-- Fase 2 -->
+                        <div class="card flex-1 fade-in-up">
+                             <div class="flex items-center justify-center bg-purple-500 rounded-full w-16 h-16 text-2xl font-bold mb-4">2</div>
+                            <h3 class="text-2xl font-bold">Fase 2: Optimización</h3>
+                            <p class="text-xl font-mono my-4">Max Z = 3x₁ + 2x₂</p>
+                            <p class="text-gray-400">Con la base "limpia" de la Fase 1, se resuelve el problema original.</p>
+                            <div class="mt-4 p-3 rounded-lg text-lg w-full">
+                                 <svg class="icon mx-auto text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-3.75-2.25M21 18l-3.75-2.25"></path></svg>
+                                 <p class="font-bold mt-2">Encontrar la solución óptima.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 9: Demo -->
+            <div id="slide-9" class="slide">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-bold mb-8 slide-title">Demostración de la Aplicación</h2>
+                    <div class="mock-ui fade-in-up">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-lg font-bold">Solver PL</span>
+                            <div class="flex space-x-1.5">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-md text-left">
+                            <p class="text-gray-300">> Ingrese datos del problema...</p>
+                            <p class="text-gray-300">> Seleccione Método: <span class="text-white font-semibold">Gran M</span></p>
+                            <p class="text-gray-300">> Seleccione Objetivo: <span class="text-white font-semibold">Maximizar</span></p>
+                            <button id="solveButton" class="mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-md font-bold transition-colors">Resolver Problema</button>
+                        </div>
+                        <div id="resultWindow" class="mock-window">
+    Solución Óptima Encontrada
+    --------------------------
+    Variables de Decisión:
+      X1: 3.00
+      X2: 12.00
+    Función Objetivo (Z):
+      <span class="text-green-400 font-bold">33.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 10: Arquitectura -->
+            <div id="slide-10" class="slide">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-bold mb-12 slide-title">Arquitectura del Software</h2>
+                    <div class="flex flex-col md:flex-row gap-4 items-center justify-center">
+                        <div class="card flex-1 fade-in-up">
+                            <h3 class="text-2xl font-bold">Modelo</h3>
+                            <p class="text-gray-400">La lógica y los datos</p>
+                            <code class="text-indigo-400">SimplexBase.java</code>
+                            <code class="text-indigo-400">GranM.java</code>
+                            <code class="text-indigo-400">DosFases.java</code>
+                        </div>
+                        <div class="arrow text-2xl fade-in-up">&harr;</div>
+                         <div class="card flex-1 bg-indigo-600 border-indigo-500 fade-in-up">
+                            <h3 class="text-2xl font-bold">Controlador</h3>
+                            <p>El cerebro que conecta todo</p>
+                             <code class="text-white">HelloController.java</code>
+                        </div>
+                         <div class="arrow text-2xl fade-in-up">&harr;</div>
+                        <div class="card flex-1 fade-in-up">
+                            <h3 class="text-2xl font-bold">Vista</h3>
+                            <p>La interfaz de usuario</p>
+                            <code class="text-indigo-400">hello-view.fxml</code>
+                            <code class="text-indigo-400">WindowSolucion.java</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 11: Casos Especiales -->
+            <div id="slide-11" class="slide">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-bold mb-8 slide-title">Manejo de Casos Especiales</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                        <div class="card fade-in-up">
+                            <div class="text-5xl text-red-500 mb-4">⛔</div>
+                            <h3 class="text-xl font-bold">Infactibilidad</h3>
+                            <p>Detecta variables artificiales en base con valor > 0</p>
+                        </div>
+                        <div class="card fade-in-up">
+                            <div class="text-5xl text-yellow-500 mb-4">∞</div>
+                            <h3 class="text-xl font-bold">No Acotado</h3>
+                            <p>Identifica cuando no existe fila pivote válida</p>
+                        </div>
+                        <div class="card fade-in-up">
+                            <div class="text-5xl text-blue-500 mb-4">ε</div>
+                            <h3 class="text-xl font-bold">Estabilidad Numérica</h3>
+                            <p>Uso de épsilon (1e-10) para evitar errores de punto flotante</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 12: Resultados y Pruebas -->
+            <div id="slide-12" class="slide">
+                <div class="text-center w-full">
+                     <h2 class="text-4xl font-bold mb-8 slide-title">Resultados Validados</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                        <div class="card flex-row justify-between items-center fade-in-up">
+                            <p class="text-lg">Caso de Maximización</p>
+                            <span class="text-3xl text-green-400">✅</span>
+                        </div>
+                         <div class="card flex-row justify-between items-center fade-in-up">
+                            <p class="text-lg">Caso de Minimización</p>
+                            <span class="text-3xl text-green-400">✅</span>
+                        </div>
+                         <div class="card flex-row justify-between items-center fade-in-up">
+                            <p class="text-lg">Problema Infactible</p>
+                            <span class="text-3xl text-green-400">✅</span>
+                        </div>
+                         <div class="card flex-row justify-between items-center fade-in-up">
+                            <p class="text-lg">Solución no Acotada</p>
+                            <span class="text-3xl text-green-400">✅</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Validación -->
+            <div id="slide-13" class="slide">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-bold mb-8 slide-title">Validación con Problemas Reales</h2>
+                    <div class="mock-ui fade-in-up max-w-2xl mx-auto">
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <p class="text-green-400 font-mono text-left mb-2">Problema: Maximizar Z = 3x₁ + 5x₂</p>
+                            <p class="text-gray-300 text-left">Restricciones:</p>
+                            <p class="text-gray-300 text-left pl-4">x₁ ≤ 4</p>
+                            <p class="text-gray-300 text-left pl-4">2x₂ ≤ 12</p>
+                            <p class="text-gray-300 text-left pl-4">3x₁ + 2x₂ ≤ 18</p>
+                            <div class="mt-4 p-3 bg-gray-900 rounded">
+                                <p class="text-green-400">Solución Óptima:</p>
+                                <p class="text-white">x₁ = 2.00, x₂ = 6.00, Z = 36.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-6 text-gray-400 fade-in-up">
+                        Resultados consistentes con soluciones académicas y comerciales
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 14: Conclusiones (con animación escalonada) -->
+            <div id="slide-14" class="slide">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-bold mb-10 slide-title">Conclusiones y Futuro</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Conclusiones -->
+                        <div class="space-y-6">
+                            <h3 class="text-2xl font-bold text-indigo-400 stagger-item">Lo que Logramos</h3>
+                            <div class="card text-left flex-row items-center gap-4 stagger-item">
+                                <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <span>Automatización exitosa que <span class="highlight">ahorra tiempo</span> y <span class="highlight">reduce errores</span>.</span>
+                            </div>
+                            <div class="card text-left flex-row items-center gap-4 stagger-item" style="transition-delay: 0.2s;">
+                                <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-graduation-cap text-blue-400"></i>
+                                </div>
+                                <span>Potente <span class="highlight">herramienta educativa</span> para visualizar el proceso Simplex.</span>
+                            </div>
+                            <div class="card text-left flex-row items-center gap-4 stagger-item" style="transition-delay: 0.4s;">
+                                <div class="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-shield-alt text-yellow-400"></i>
+                                </div>
+                                <span>Implementación <span class="highlight">robusta</span> que maneja casos especiales.</span>
+                            </div>
+                        </div>
+                        <!-- Futuro -->
+                        <div class="space-y-6">
+                            <h3 class="text-2xl font-bold text-purple-400 stagger-item">Próximos Pasos</h3>
+                            <div class="card text-left flex-row items-center gap-4 stagger-item">
+                                <div class="w-12 h-12 rounded-full bg-gray-600/20 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-file-export text-gray-300"></i>
+                                </div>
+                                <span>Exportar resultados a <span class="highlight">PDF/Excel</span>.</span>
+                            </div>
+                            <div class="card text-left flex-row items-center gap-4 stagger-item" style="transition-delay: 0.2s;">
+                                <div class="w-12 h-12 rounded-full bg-gray-600/20 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-chart-line text-gray-300"></i>
+                                </div>
+                                <span>Implementar <span class="highlight">Análisis de Sensibilidad</span>.</span>
+                            </div>
+                            <div class="card text-left flex-row items-center gap-4 stagger-item" style="transition-delay: 0.4s;">
+                                <div class="w-12 h-12 rounded-full bg-gray-600/20 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-project-diagram text-gray-300"></i>
+                                </div>
+                                <span>Añadir nuevos algoritmos como <span class="highlight">Simplex Revisado</span>.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-12 stagger-item" style="transition-delay: 0.6s;">
+                        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-1 rounded-full inline-block pulse">
+                            <div class="bg-gray-900 px-8 py-3 rounded-full">
+                                <p class="text-white font-bold">¡Gracias por su atención!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 flex justify-center items-center space-x-4 z-10">
+        <button id="prev" class="nav-button">
+            <i class="fas fa-arrow-left mr-2"></i>Anterior
+        </button>
+        <span id="slide-counter" class="text-lg font-semibold bg-gray-800/80 px-4 py-2 rounded-full">1 / 5</span>
+        <button id="next" class="nav-button">
+            Siguiente<i class="fas fa-arrow-right ml-2"></i>
+        </button>
+    </div>
+
+<script>
+    // Configuración de partículas
+    function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Tamaño aleatorio
+            const size = Math.random() * 10 + 5;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Posición aleatoria
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            // Color aleatorio
+            const colors = [
+                'rgba(99, 102, 241, 0.4)',
+                'rgba(139, 92, 246, 0.4)',
+                'rgba(79, 70, 229, 0.4)'
+            ];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.background = color;
+            
+            // Animación personalizada
+            const duration = Math.random() * 10 + 10;
+            const delay = Math.random() * 5;
+            particle.style.animationDuration = `${duration}s`;
+            particle.style.animationDelay = `${delay}s`;
+            
+            particlesContainer.appendChild(particle);
+        }
+    }
+    
+    // Sistema de navegación de slides
+    let currentSlide = 1;
+    const totalSlides = 14;
+    const slides = document.querySelectorAll('.slide');
+    const prevButton = document.getElementById('prev');
+    const nextButton = document.getElementById('next');
+    const slideCounter = document.getElementById('slide-counter');
+    const progressBar = document.querySelectorAll('.progress-bar');
+
+    // Función para mostrar elementos escalonadamente
+    function animateSlideElements(slide) {
+        // Elementos stagger-item (para slides 2-5 y 14)
+        const staggerItems = slide.querySelectorAll('.stagger-item');
+        
+        // Elementos fade-in-up (para slides 6-13)
+        const fadeInUpItems = slide.querySelectorAll('.fade-in-up');
+        
+        // Títulos de slide
+        const slideTitles = slide.querySelectorAll('.slide-title');
+        
+        // Animación de títulos
+        slideTitles.forEach((title, index) => {
+            setTimeout(() => {
+                title.classList.add('visible');
+            }, index * 200);
+        });
+        
+        // Animación de elementos stagger-item
+        staggerItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('visible');
+            }, 500 + (index * 200));
+        });
+        
+        // Animación de elementos fade-in-up
+        fadeInUpItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('visible');
+            }, 300 + (index * 300));
+        });
+    }
+    
+    function showSlide(n) {
+        // Ocultar todas las slides
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+        });
+        
+        // Mostrar la nueva slide
+        const newSlide = document.getElementById(`slide-${n}`);
+        if (newSlide) {
+            newSlide.classList.add('active');
+            
+            // Aplicar animaciones escalonadas para todos los slides
+            animateSlideElements(newSlide);
+        }
+        
+        // Actualizar contador
+        slideCounter.textContent = `${n} / ${totalSlides}`;
+        
+        // Actualizar estado de botones
+        prevButton.disabled = n === 1;
+        nextButton.disabled = n === totalSlides;
+        
+        // Actualizar barra de progreso
+        progressBar.forEach(bar => {
+            bar.style.width = `${(n / totalSlides) * 100}%`;
+        });
+    }
+
+    prevButton.addEventListener('click', () => {
+        if (currentSlide > 1) {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        if (currentSlide < totalSlides) {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+    });
+    
+    // Demo button logic
+    const solveButton = document.getElementById('solveButton');
+    const resultWindow = document.getElementById('resultWindow');
+    if(solveButton) {
+        solveButton.addEventListener('click', () => {
+            resultWindow.classList.add('visible');
+        });
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+            nextButton.click();
+        } else if (e.key === 'ArrowLeft') {
+            prevButton.click();
+        }
+    });
+
+    // Inicialización
+    createParticles();
+    showSlide(currentSlide);
+    
+    // Mostrar elementos de la primera slide
+    setTimeout(() => {
+        showSlide(1);
+    }, 100);
+</script>
+</body>
+</html>
