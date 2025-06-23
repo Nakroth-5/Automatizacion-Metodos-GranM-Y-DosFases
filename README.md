@@ -167,7 +167,7 @@ src/
 
 ## 💻 Tecnologías Utilizadas
 
-- **Lenguaje**: Java 17
+- **Lenguaje**: Java 24
 - **Framework GUI**: JavaFX 17
 - **Gestor de Dependencias**: Apache Maven
 - **IDE Recomendado**: IntelliJ IDEA, Eclipse, o NetBeans
