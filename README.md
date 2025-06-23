@@ -204,13 +204,27 @@ Las contribuciones son bienvenidas. Para contribuir:
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
-
 ## 🔗 Enlaces Adicionales
 
-- **Documentación del Proyecto**: [Proyecto IO1.docx](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/blob/master/Proyecto%20IO1.docx)
-- **Presentación**: [Ver Presentación]([https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/blob/master/Presentacion.html)
-- **Reportar Bugs**: [Issues](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/issues)
-- **Solicitar Funcionalidades**: [Feature Requests](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/issues)
+### 📊 Documentación y Presentaciones
+
+| Recurso | Descripción | Enlace |
+|---------|-------------|--------|
+| **🎯 Presentación Interactiva** | Presentación HTML completa del proyecto | [Ver en Navegador](https://nakroth-5.github.io/Automatizacion-Metodos-GranM-Y-DosFases/Presentacion.html) |
+| **📄 Documentación Técnica** | Documento completo del proyecto en formato Word | [Descargar PDF](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/raw/master/Proyecto%20IO1.docx) |
+| **💻 Código Fuente** | Repositorio completo en GitHub | [Ver Código](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases) |
+
+### 🛠️ Soporte y Desarrollo
+
+- **🐛 Reportar Bugs**: [Issues](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/issues)
+- **✨ Solicitar Funcionalidades**: [Feature Requests](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/issues/new?template=feature_request.md)
+- **💬 Discusiones**: [Discussions](https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases/discussions)
+
+### 🎓 Recursos Educativos
+
+- **📚 Tutorial de Programación Lineal**: Conceptos básicos y avanzados
+- **🔢 Ejemplos Prácticos**: Casos de uso reales resueltos paso a paso
+- **📖 Guía de Algoritmos**: Explicación detallada de Gran M y Dos Fases
 
 ---
 
