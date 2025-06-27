@@ -57,7 +57,7 @@ Antes de instalar el proyecto, necesitas tener **Git** y **Java 24** instalados 
 
 ### 🖥️ Windows
 
-#### Instalación desde Terminal (PowerShell/CMD)
+#### Instalación desde Terminal (PowerShell)
 
 **1. Instalar Chocolatey (Gestor de Paquetes para Windows)**
 ```powershell
