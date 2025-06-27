@@ -1,6 +1,6 @@
 # Automatización de los Métodos Gran M y Dos Fases
 
-[![Java](https://img.shields.io/badge/Java-24%2B-blue)](https://www.java.com/)
+[![Java](https://img.shields.io/badge/Java-22%2B-blue)](https://www.java.com/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-17-purple)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)]()
@@ -53,7 +53,7 @@ Esta herramienta está diseñada para estudiantes, profesores e ingenieros que n
 
 ## 🔧 Instalación de Dependencias
 
-Antes de instalar el proyecto, necesitas tener **Git** y **Java 24** instalados en tu sistema. Sigue las instrucciones según tu sistema operativo:
+Antes de instalar el proyecto, necesitas tener **Git** y **Java 22** instalados en tu sistema. Sigue las instrucciones según tu sistema operativo:
 
 ### 🖥️ Windows
 
