@@ -11,9 +11,9 @@
 
 - [Descripción](#-descripción)
 - [Características](#-características)
-- [Requisitos Previos](#-requisitos-previos)
 - [Instalación de Dependencias](#-instalación-de-dependencias)
-- [Instalación](#-instalación)
+- [Requisitos Previos](#-requisitos-previos)
+- [Instalación del Proyecto](#-instalación-del-proyecto)
 - [Manual de Uso](#-manual-de-uso)
 - [Estructura del Proyecto](#-estructura-del-proyecto)
 - [Tecnologías Utilizadas](#-tecnologías-utilizadas)
@@ -51,163 +51,188 @@ Esta herramienta está diseñada para estudiantes, profesores e ingenieros que n
 - Cálculo preciso con manejo de decimales
 - Exportación de resultados detallados
 
-## 🛠️ Requisitos Previos
+## 🔧 Instalación de Dependencias
 
-- **Java Development Kit (JDK) 24 o superior**
-- **Git** (para clonar el repositorio)
-- **Apache Maven 3.6+**
-- **Sistema Operativo**: Windows, macOS o Linux
-- **Memoria RAM**: Mínimo 4GB recomendado
-- **Espacio en Disco**: 100MB libres
+Antes de instalar el proyecto, necesitas tener **Git** y **Java 24** instalados en tu sistema. Sigue las instrucciones según tu sistema operativo:
 
-## 📦 Instalación de Dependencias
+### 🖥️ Windows
 
-### 🪟 Windows (PowerShell/Command Prompt)
+#### Instalación desde Terminal (PowerShell/CMD)
 
-#### Instalación de Git
+**1. Instalar Chocolatey (Gestor de Paquetes para Windows)**
 ```powershell
-# Opción 1: Usando Chocolatey (recomendado)
-# Instalar Chocolatey primero si no lo tienes
+# Abrir PowerShell como Administrador y ejecutar:
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
 
-# Instalar Git
+**2. Instalar Git**
+```cmd
+# Con Chocolatey:
 choco install git -y
 
-# Opción 2: Usando Winget (Windows 10 1809+)
-winget install Git.Git
-
-# Opción 3: Usando Scoop
-# Instalar Scoop primero
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-irm get.scoop.sh | iex
-
-# Instalar Git
-scoop install git
+# O con winget (Windows Package Manager):
+winget install --id Git.Git -e --source winget
 ```
 
-#### Instalación de Java 24
-```powershell
-# Opción 1: Usando Chocolatey
-choco install openjdk24 -y
+**3. Instalar Java 24**
+```cmd
+# Con Chocolatey (OpenJDK):
+choco install openjdk --version=24.0.2 -y
 
-# Opción 2: Usando Winget
+# O con winget:
 winget install EclipseAdoptium.Temurin.24.JDK
+```
 
-# Opción 3: Usando Scoop
-scoop bucket add java
-scoop install openjdk24
-
-# Verificar instalación
+**4. Verificar Instalación**
+```cmd
+git --version
 java --version
 javac --version
-```
-
-#### Instalación de Maven
-```powershell
-# Usando Chocolatey
-choco install maven -y
-
-# Usando Winget
-winget install Apache.Maven
-
-# Usando Scoop
-scoop install maven
-
-# Verificar instalación
-mvn --version
 ```
 
 ### 🐧 Linux
 
 #### Arch Linux
+
+**1. Actualizar el sistema**
 ```bash
-# Actualizar sistema
 sudo pacman -Syu
+```
 
-# Instalar Git
+**2. Instalar Git**
+```bash
 sudo pacman -S git
+```
 
-# Instalar Java 24 (OpenJDK)
+**3. Instalar Java 24**
+```bash
+# Instalar OpenJDK 24
 sudo pacman -S jdk-openjdk
 
-# Instalar Maven
-sudo pacman -S maven
+# O si prefieres usar AUR para versiones específicas:
+# Instalar yay (AUR helper) si no lo tienes
+sudo pacman -S base-devel git
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
 
-# Verificar instalaciones
-git --version
-java --version
-mvn --version
+# Buscar e instalar Java 24 desde AUR
+yay -S jdk24-openjdk
 ```
 
-#### Ubuntu/Debian
+**4. Configurar Java por defecto**
 ```bash
-# Actualizar repositorios
+sudo archlinux-java set java-24-openjdk
+```
+
+#### Debian/Ubuntu
+
+**1. Actualizar repositorios**
+```bash
 sudo apt update && sudo apt upgrade -y
-
-# Instalar Git
-sudo apt install git -y
-
-# Instalar Java 24
-# Opción 1: Usando repositorio oficial
-sudo apt install openjdk-24-jdk -y
-
-# Opción 2: Si no está disponible, usar el repositorio de Eclipse Adoptium
-wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo apt-key add -
-echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
-sudo apt update
-sudo apt install temurin-24-jdk -y
-
-# Instalar Maven
-sudo apt install maven -y
-
-# Verificar instalaciones
-git --version
-java --version
-mvn --version
 ```
 
-#### Configuración de Variables de Entorno (Linux)
+**2. Instalar Git**
 ```bash
-# Agregar al archivo ~/.bashrc o ~/.zshrc
-echo 'export JAVA_HOME=/usr/lib/jvm/java-24-openjdk-amd64' >> ~/.bashrc
-echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
+sudo apt install git -y
+```
 
-# Recargar configuración
-source ~/.bashrc
+**3. Instalar Java 24**
+```bash
+# Método 1: Usar SDKMAN (Recomendado)
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install java 24-open
 
-# Verificar configuración
-echo $JAVA_HOME
+# Método 2: Repositorio de Oracle/OpenJDK
+wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add -
+sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
+sudo apt update
+sudo apt install java-24-amazon-corretto-jdk -y
+
+# Método 3: Instalar desde repositorios oficiales (si está disponible)
+sudo apt install openjdk-24-jdk -y
+```
+
+**4. Configurar Java por defecto**
+```bash
+sudo update-alternatives --config java
+sudo update-alternatives --config javac
+```
+
+#### Instalación de Maven (Todas las distribuciones Linux)
+
+**Arch Linux:**
+```bash
+sudo pacman -S maven
+```
+
+**Debian/Ubuntu:**
+```bash
+sudo apt install maven -y
+```
+
+**Con SDKMAN (Recomendado para todas las distribuciones):**
+```bash
+sdk install maven
+```
+
+### ✅ Verificar Instalación
+
+Ejecuta estos comandos para verificar que todo esté correctamente instalado:
+
+```bash
+# Verificar Git
+git --version
+# Salida esperada: git version 2.x.x
+
+# Verificar Java
+java --version
+# Salida esperada: openjdk 24.x.x
+
+# Verificar Compilador Java
+javac --version
+# Salida esperada: javac 24.x.x
+
+# Verificar Maven
+mvn --version
+# Salida esperada: Apache Maven 3.x.x
 ```
 
 ### 🔧 Configuración Adicional
 
-#### Configurar Git (Todas las plataformas)
-```bash
-# Configurar nombre de usuario
-git config --global user.name "Tu Nombre"
+**Configurar Variables de Entorno (si es necesario):**
 
-# Configurar email
-git config --global user.email "tu.email@ejemplo.com"
+**Windows:**
+```cmd
+# Verificar JAVA_HOME
+echo %JAVA_HOME%
 
-# Verificar configuración
-git config --list
+# Si no está configurada, agregar manualmente:
+# Ir a: Panel de Control > Sistema > Configuración avanzada del sistema > Variables de entorno
+# Agregar JAVA_HOME apuntando al directorio de instalación de Java
 ```
 
-#### Verificar Instalaciones
+**Linux:**
 ```bash
-# Verificar todas las herramientas
-git --version
-java --version
-javac --version
-mvn --version
-
-# Debería mostrar algo similar a:
-# git version 2.x.x
-# openjdk 24.x.x
-# Apache Maven 3.x.x
+# Agregar al archivo ~/.bashrc o ~/.zshrc
+echo 'export JAVA_HOME="/usr/lib/jvm/java-24-openjdk"' >> ~/.bashrc
+echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
 ```
 
-## 📥 Instalación
+## 🛠️ Requisitos Previos
+
+Una vez instaladas las dependencias, asegúrate de tener:
+
+- **Java Development Kit (JDK) 24 o superior** ✅
+- **Git** ✅
+- **Apache Maven 3.6+** ✅
+- **Sistema Operativo**: Windows, macOS o Linux
+- **Memoria RAM**: Mínimo 4GB recomendado
+- **Espacio en Disco**: 100MB libres
+
+## 📥 Instalación del Proyecto
 
 ### Método 1: Clonar desde GitHub
 
@@ -222,20 +247,7 @@ cd Automatizacion-Metodos-GranM-Y-DosFases
 mvn clean javafx:run
 ```
 
-### Método 2: Ejecutar JAR precompilado (Recomendado)
-
-```bash
-# Después de clonar, navegar al directorio del JAR
-cd AutomatizacionMetodosGranMYDosFases/out/artifacts/AutomatizacionMetodosGranMYDosFases_jar
-
-# Ejecutar el JAR directamente
-java -jar AutomatizacionMetodosGranMYDosFases.jar
-
-# Si necesitas especificar módulos JavaFX (en caso de error):
-java --module-path /usr/lib/jvm/javafx-21/lib --add-modules javafx.controls,javafx.fxml -jar AutomatizacionMetodosGranMYDosFases.jar
-```
-
-### Método 3: Ejecutar con Maven
+### Método 2: Ejecutar con Java directamente
 
 ```bash
 # Después de clonar, compilar el proyecto
@@ -243,25 +255,12 @@ mvn clean compile
 
 # Ejecutar la aplicación
 mvn exec:java -Dexec.mainClass="Main"
-
-# O usar el plugin JavaFX
-mvn javafx:run
 ```
 
-### Método 4: Abrir en IntelliJ IDEA
+### Método 3: Generar JAR ejecutable
 
 ```bash
-# Después de clonar el repositorio
-# 1. Abrir IntelliJ IDEA
-# 2. File → Open → Seleccionar la carpeta del proyecto
-# 3. Esperar a que Maven sincronice las dependencias
-# 4. Buscar la clase Main y ejecutar con clic derecho → Run
-```
-
-### Método 5: Generar nuevo JAR ejecutable
-
-```bash
-# Generar JAR con dependencias usando Maven
+# Generar JAR con dependencias
 mvn clean package
 
 # Ejecutar el JAR generado
