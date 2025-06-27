@@ -69,7 +69,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```cmd
 # Con Chocolatey:
 choco install git -y
-
+```
 
 **3. Instalar Java**
 ```cmd
