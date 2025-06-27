@@ -241,7 +241,7 @@ Una vez instaladas las dependencias, asegúrate de tener:
 git clone https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases.git
 
 # Navegar al directorio del proyecto
-cd Automatizacion-Metodos-GranM-Y-DosFases
+cd Automatizacion-Metodos-GranM-Y-DosFase/AutomatizacionMetodosGranMYDosFases
 
 # Compilar y ejecutar con Maven
 mvn clean javafx:run
