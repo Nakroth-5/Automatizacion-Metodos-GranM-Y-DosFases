@@ -12,6 +12,7 @@
 - [Descripción](#-descripción)
 - [Características](#-características)
 - [Requisitos Previos](#-requisitos-previos)
+- [Instalación de Dependencias](#-instalación-de-dependencias)
 - [Instalación](#-instalación)
 - [Manual de Uso](#-manual-de-uso)
 - [Estructura del Proyecto](#-estructura-del-proyecto)
@@ -53,10 +54,158 @@ Esta herramienta está diseñada para estudiantes, profesores e ingenieros que n
 ## 🛠️ Requisitos Previos
 
 - **Java Development Kit (JDK) 24 o superior**
+- **Git** (para clonar el repositorio)
 - **Apache Maven 3.6+**
 - **Sistema Operativo**: Windows, macOS o Linux
 - **Memoria RAM**: Mínimo 4GB recomendado
 - **Espacio en Disco**: 100MB libres
+
+## 📦 Instalación de Dependencias
+
+### 🪟 Windows (PowerShell/Command Prompt)
+
+#### Instalación de Git
+```powershell
+# Opción 1: Usando Chocolatey (recomendado)
+# Instalar Chocolatey primero si no lo tienes
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+# Instalar Git
+choco install git -y
+
+# Opción 2: Usando Winget (Windows 10 1809+)
+winget install Git.Git
+
+# Opción 3: Usando Scoop
+# Instalar Scoop primero
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+irm get.scoop.sh | iex
+
+# Instalar Git
+scoop install git
+```
+
+#### Instalación de Java 24
+```powershell
+# Opción 1: Usando Chocolatey
+choco install openjdk24 -y
+
+# Opción 2: Usando Winget
+winget install EclipseAdoptium.Temurin.24.JDK
+
+# Opción 3: Usando Scoop
+scoop bucket add java
+scoop install openjdk24
+
+# Verificar instalación
+java --version
+javac --version
+```
+
+#### Instalación de Maven
+```powershell
+# Usando Chocolatey
+choco install maven -y
+
+# Usando Winget
+winget install Apache.Maven
+
+# Usando Scoop
+scoop install maven
+
+# Verificar instalación
+mvn --version
+```
+
+### 🐧 Linux
+
+#### Arch Linux
+```bash
+# Actualizar sistema
+sudo pacman -Syu
+
+# Instalar Git
+sudo pacman -S git
+
+# Instalar Java 24 (OpenJDK)
+sudo pacman -S jdk-openjdk
+
+# Instalar Maven
+sudo pacman -S maven
+
+# Verificar instalaciones
+git --version
+java --version
+mvn --version
+```
+
+#### Ubuntu/Debian
+```bash
+# Actualizar repositorios
+sudo apt update && sudo apt upgrade -y
+
+# Instalar Git
+sudo apt install git -y
+
+# Instalar Java 24
+# Opción 1: Usando repositorio oficial
+sudo apt install openjdk-24-jdk -y
+
+# Opción 2: Si no está disponible, usar el repositorio de Eclipse Adoptium
+wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo apt-key add -
+echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
+sudo apt update
+sudo apt install temurin-24-jdk -y
+
+# Instalar Maven
+sudo apt install maven -y
+
+# Verificar instalaciones
+git --version
+java --version
+mvn --version
+```
+
+#### Configuración de Variables de Entorno (Linux)
+```bash
+# Agregar al archivo ~/.bashrc o ~/.zshrc
+echo 'export JAVA_HOME=/usr/lib/jvm/java-24-openjdk-amd64' >> ~/.bashrc
+echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
+
+# Recargar configuración
+source ~/.bashrc
+
+# Verificar configuración
+echo $JAVA_HOME
+```
+
+### 🔧 Configuración Adicional
+
+#### Configurar Git (Todas las plataformas)
+```bash
+# Configurar nombre de usuario
+git config --global user.name "Tu Nombre"
+
+# Configurar email
+git config --global user.email "tu.email@ejemplo.com"
+
+# Verificar configuración
+git config --list
+```
+
+#### Verificar Instalaciones
+```bash
+# Verificar todas las herramientas
+git --version
+java --version
+javac --version
+mvn --version
+
+# Debería mostrar algo similar a:
+# git version 2.x.x
+# openjdk 24.x.x
+# Apache Maven 3.x.x
+```
 
 ## 📥 Instalación
 
@@ -204,6 +353,7 @@ Las contribuciones son bienvenidas. Para contribuir:
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
 ## 🔗 Enlaces Adicionales
 
 ### 📊 Documentación y Presentaciones
