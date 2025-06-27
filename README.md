@@ -79,7 +79,7 @@ winget install --id Git.Git -e --source winget
 # Con Chocolatey (OpenJDK):
 choco install openjdk -y
 
-#  si prefieres Oracle JDK:
+# O si prefieres Oracle JDK:
 choco install oraclejdk -y
 
 # O con winget:
@@ -95,6 +95,7 @@ choco install maven -y
 git --version
 java --version
 javac --version
+mvn --version
 ```
 
 ### 🐧 Linux
