@@ -222,7 +222,20 @@ cd Automatizacion-Metodos-GranM-Y-DosFases
 mvn clean javafx:run
 ```
 
-### Método 2: Ejecutar con Java directamente
+### Método 2: Ejecutar JAR precompilado (Recomendado)
+
+```bash
+# Después de clonar, navegar al directorio del JAR
+cd AutomatizacionMetodosGranMYDosFases/out/artifacts/AutomatizacionMetodosGranMYDosFases_jar
+
+# Ejecutar el JAR directamente
+java -jar AutomatizacionMetodosGranMYDosFases.jar
+
+# Si necesitas especificar módulos JavaFX (en caso de error):
+java --module-path /usr/lib/jvm/javafx-21/lib --add-modules javafx.controls,javafx.fxml -jar AutomatizacionMetodosGranMYDosFases.jar
+```
+
+### Método 3: Ejecutar con Maven
 
 ```bash
 # Después de clonar, compilar el proyecto
@@ -230,12 +243,25 @@ mvn clean compile
 
 # Ejecutar la aplicación
 mvn exec:java -Dexec.mainClass="Main"
+
+# O usar el plugin JavaFX
+mvn javafx:run
 ```
 
-### Método 3: Generar JAR ejecutable
+### Método 4: Abrir en IntelliJ IDEA
 
 ```bash
-# Generar JAR con dependencias
+# Después de clonar el repositorio
+# 1. Abrir IntelliJ IDEA
+# 2. File → Open → Seleccionar la carpeta del proyecto
+# 3. Esperar a que Maven sincronice las dependencias
+# 4. Buscar la clase Main y ejecutar con clic derecho → Run
+```
+
+### Método 5: Generar nuevo JAR ejecutable
+
+```bash
+# Generar JAR con dependencias usando Maven
 mvn clean package
 
 # Ejecutar el JAR generado
