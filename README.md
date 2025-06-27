@@ -70,27 +70,24 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 # Con Chocolatey:
 choco install git -y
 
-# O con winget (Windows Package Manager):
-winget install --id Git.Git -e --source winget
-```
 
-**3. Instalar Java 24**
+**3. Instalar Java**
 ```cmd
 # Con Chocolatey (OpenJDK):
 choco install openjdk -y
-
-# O si prefieres Oracle JDK:
-choco install oraclejdk -y
-
-# O con winget:
-winget install EclipseAdoptium.Temurin.24.JDK
 ```
 **4. Instalar Maven(mvn)**
 ```cmd
 # Con Chocolatey:
 choco install maven -y
 ```
-**5. Verificar Instalación**
+**5. Instalar javaFx**
+# 
+```cmd
+# Con Chocolatey:
+choco install scenebuilder --force -y
+```
+**6. Verificar Instalación**
 ```cmd
 git --version
 java --version
@@ -112,7 +109,7 @@ sudo pacman -Syu
 sudo pacman -S git
 ```
 
-**3. Instalar Java 24**
+**3. Instalar Java**
 ```bash
 # Instalar OpenJDK 24
 sudo pacman -S jdk-openjdk
@@ -124,7 +121,7 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-# Buscar e instalar Java 24 desde AUR
+# Buscar e instalar Java desde AUR
 yay -S jdk24-openjdk
 ```
 
@@ -144,69 +141,6 @@ sudo apt update && sudo apt upgrade -y
 ```bash
 sudo apt install git -y
 ```
-
-**3. Instalar Java 24**
-```bash
-# Método 1: Usar SDKMAN (Recomendado)
-curl -s "https://get.sdkman.io" | bash
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk install java 24-open
-
-# Método 2: Repositorio de Oracle/OpenJDK
-wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add -
-sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
-sudo apt update
-sudo apt install java-24-amazon-corretto-jdk -y
-
-# Método 3: Instalar desde repositorios oficiales (si está disponible)
-sudo apt install openjdk-24-jdk -y
-```
-
-**4. Configurar Java por defecto**
-```bash
-sudo update-alternatives --config java
-sudo update-alternatives --config javac
-```
-
-#### Instalación de Maven (Todas las distribuciones Linux)
-
-**Arch Linux:**
-```bash
-sudo pacman -S maven
-```
-
-**Debian/Ubuntu:**
-```bash
-sudo apt install maven -y
-```
-
-**Con SDKMAN (Recomendado para todas las distribuciones):**
-```bash
-sdk install maven
-```
-
-### ✅ Verificar Instalación
-
-Ejecuta estos comandos para verificar que todo esté correctamente instalado:
-
-```bash
-# Verificar Git
-git --version
-# Salida esperada: git version 2.x.x
-
-# Verificar Java
-java --version
-# Salida esperada: openjdk 24.x.x
-
-# Verificar Compilador Java
-javac --version
-# Salida esperada: javac 24.x.x
-
-# Verificar Maven
-mvn --version
-# Salida esperada: Apache Maven 3.x.x
-```
-
 ### 🔧 Configuración Adicional
 
 **Configurar Variables de Entorno (si es necesario):**
@@ -233,7 +167,7 @@ source ~/.bashrc
 
 Una vez instaladas las dependencias, asegúrate de tener:
 
-- **Java Development Kit (JDK) 24 o superior** ✅
+- **Java Development Kit (JDK) 22 o superior** ✅
 - **Git** ✅
 - **Apache Maven 3.6+** ✅
 - **Sistema Operativo**: Windows, macOS o Linux
@@ -249,7 +183,7 @@ Una vez instaladas las dependencias, asegúrate de tener:
 git clone https://github.com/Nakroth-5/Automatizacion-Metodos-GranM-Y-DosFases.git
 
 # Navegar al directorio del proyecto
-cd Automatizacion-Metodos-GranM-Y-DosFase/AutomatizacionMetodosGranMYDosFases
+cd Automatizacion-Metodos-GranM-Y-DosFases/AutomatizacionMetodosGranMYDosFases
 
 # Compilar y ejecutar con Maven
 mvn clean javafx:run
@@ -349,7 +283,7 @@ src/
 
 ## 💻 Tecnologías Utilizadas
 
-- **Lenguaje**: Java 24
+- **Lenguaje**: Java 22
 - **Framework GUI**: JavaFX 17
 - **Gestor de Dependencias**: Apache Maven
 - **IDE Recomendado**: IntelliJ IDEA, Eclipse, o NetBeans
