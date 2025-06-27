@@ -176,7 +176,7 @@ Una vez instaladas las dependencias, asegúrate de tener:
 
 ## 📥 Instalación del Proyecto
 
-### Método 1: Clonar desde GitHub
+### Clonar desde GitHub
 
 ```bash
 # Clonar el repositorio
@@ -189,25 +189,6 @@ cd Automatizacion-Metodos-GranM-Y-DosFases/AutomatizacionMetodosGranMYDosFases
 mvn clean javafx:run
 ```
 
-### Método 2: Ejecutar con Java directamente
-
-```bash
-# Después de clonar, compilar el proyecto
-mvn clean compile
-
-# Ejecutar la aplicación
-mvn exec:java -Dexec.mainClass="Main"
-```
-
-### Método 3: Generar JAR ejecutable
-
-```bash
-# Generar JAR con dependencias
-mvn clean package
-
-# Ejecutar el JAR generado
-java -jar target/simplex-automation-1.0.jar
-```
 
 ## 🖥️ Manual de Uso
 
