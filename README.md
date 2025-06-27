@@ -77,13 +77,20 @@ winget install --id Git.Git -e --source winget
 **3. Instalar Java 24**
 ```cmd
 # Con Chocolatey (OpenJDK):
-choco install openjdk --version=24.0.2 -y
+choco install openjdk -y
+
+#  si prefieres Oracle JDK:
+choco install oraclejdk -y
 
 # O con winget:
 winget install EclipseAdoptium.Temurin.24.JDK
 ```
-
-**4. Verificar Instalación**
+**4. Instalar Maven(mvn)**
+```cmd
+# Con Chocolatey:
+choco install maven -y
+```
+**5. Verificar Instalación**
 ```cmd
 git --version
 java --version
